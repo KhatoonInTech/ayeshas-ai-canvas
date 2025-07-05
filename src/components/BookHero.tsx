@@ -16,13 +16,19 @@ interface BookHeroProps {
 
 const BookHero = ({ mousePosition, onTearComplete }: BookHeroProps) => {
   const [scrollY, setScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [isTearing, setIsTearing] = useState(false);
   const controls = useAnimation();
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const direction = currentScrollY > lastScrollY ? 'down' : 'up';
+      
       setScrollY(currentScrollY);
+      setScrollDirection(direction);
+      setLastScrollY(currentScrollY);
       
       if (currentScrollY > 50 && !isTearing) {
         setIsTearing(true);
@@ -32,7 +38,7 @@ const BookHero = ({ mousePosition, onTearComplete }: BookHeroProps) => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isTearing]);
+  }, [lastScrollY, isTearing]);
 
   const startTearAnimation = async () => {
     await controls.start({
@@ -52,13 +58,20 @@ const BookHero = ({ mousePosition, onTearComplete }: BookHeroProps) => {
     y: (mousePosition.y - window.innerHeight / 2) * 0.01
   };
 
+  // Calculate fold transformation based on scroll
+  const foldIntensity = Math.min(scrollY / 300, 1); // Max fold at 300px scroll
+  const foldTransform = scrollDirection === 'down' 
+    ? `perspective(2000px) rotateX(${foldIntensity * 45}deg) translateY(${foldIntensity * -50}px)`
+    : `perspective(2000px) rotateX(${foldIntensity * -15}deg) translateY(${foldIntensity * 20}px)`;
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
       <motion.div 
-        className="relative"
+        className="relative transition-transform duration-500 ease-out"
         animate={controls}
         style={{
-          transform: `translate(${parallaxOffset.x}px, ${parallaxOffset.y}px)`
+          transform: `translate(${parallaxOffset.x}px, ${parallaxOffset.y}px) ${scrollY > 0 ? foldTransform : 'none'}`,
+          transformOrigin: 'center bottom'
         }}
       >
         {/* Book Container */}
@@ -78,6 +91,17 @@ const BookHero = ({ mousePosition, onTearComplete }: BookHeroProps) => {
           <BookZipElement />
           <BookTearEffect isTearing={isTearing} />
         </div>
+
+        {/* Newspaper fold crease effect */}
+        {scrollY > 0 && (
+          <div 
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: `linear-gradient(to bottom, transparent ${50 - foldIntensity * 20}%, rgba(0,0,0,0.1) ${50}%, transparent ${50 + foldIntensity * 20}%)`,
+              opacity: foldIntensity * 0.5
+            }}
+          />
+        )}
       </motion.div>
     </div>
   );
