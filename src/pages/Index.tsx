@@ -8,6 +8,7 @@ import Projects from '../components/Projects';
 import Skills from '../components/Skills';
 import Contact from '../components/Contact';
 import Reviews from '../components/Reviews';
+import HappyClients from '../components/HappyClients';
 import Navigation from '../components/Navigation';
 import Background3D from '../components/Background3D';
 import MouseTrackingBackground from '../components/MouseTrackingBackground';
@@ -121,6 +122,22 @@ const Index = () => {
             transition={{ duration: 0.8 }}
           >
             <Reviews />
+          </motion.div>
+        </section>
+
+        <section 
+          id="clients" 
+          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
+            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <motion.div 
+            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <HappyClients />
           </motion.div>
         </section>
         

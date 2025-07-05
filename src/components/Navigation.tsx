@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -13,6 +14,7 @@ const Navigation = () => {
     { id: 'projects', label: 'Projects' },
     { id: 'skills', label: 'Skills' },
     { id: 'reviews', label: 'Reviews' },
+    { id: 'clients', label: 'Clients' },
     { id: 'contact', label: 'Contact' }
   ];
 
