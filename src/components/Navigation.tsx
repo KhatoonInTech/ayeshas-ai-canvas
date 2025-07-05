@@ -11,14 +11,37 @@ const Navigation = () => {
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'skills', label: 'Skills' },
+    { id: 'reviews', label: 'Reviews' },
+    { id: 'clients', label: 'Clients' },
     { id: 'contact', label: 'Contact' }
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map(item => ({
+        id: item.id,
+        element: document.getElementById(item.id),
+      }));
+
+      const scrollPosition = window.scrollY + 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section.element && section.element.offsetTop <= scrollPosition) {
+          setActiveSection(section.id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(sectionId);
     }
   };
 
@@ -31,14 +54,15 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <motion.div 
-            className="text-2xl font-bold text-white"
+            className="text-2xl font-bold text-white cursor-pointer"
             whileHover={{ scale: 1.05 }}
+            onClick={() => scrollToSection('hero')}
           >
             Ayesha Noreen
           </motion.div>
           
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
+          <div className="hidden md:flex space-x-6">
+            {navItems.slice(0, 6).map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
