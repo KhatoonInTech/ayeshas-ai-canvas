@@ -16,35 +16,78 @@ interface BookHeroProps {
 
 const BookHero = ({ mousePosition, onTearComplete }: BookHeroProps) => {
   const [scrollY, setScrollY] = useState(0);
-  const [isTearing, setIsTearing] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
+  const [isAnimating, setIsAnimating] = useState(false);
   const controls = useAnimation();
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      
+      // Determine scroll direction
+      if (currentScrollY > lastScrollY) {
+        setScrollDirection('down');
+      } else if (currentScrollY < lastScrollY) {
+        setScrollDirection('up');
+      }
+      
+      setLastScrollY(currentScrollY);
       setScrollY(currentScrollY);
       
-      if (currentScrollY > 50 && !isTearing) {
-        setIsTearing(true);
-        startTearAnimation();
+      // Trigger curtain animation based on scroll
+      if (currentScrollY > 100 && scrollDirection === 'down' && !isAnimating) {
+        startCurtainFoldAnimation();
+      } else if (currentScrollY < 50 && scrollDirection === 'up' && !isAnimating) {
+        startCurtainUnfoldAnimation();
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isTearing]);
+  }, [lastScrollY, scrollDirection, isAnimating]);
 
-  const startTearAnimation = async () => {
+  const startCurtainFoldAnimation = async () => {
+    setIsAnimating(true);
+    
+    // Fold upward like horizontal curtains
     await controls.start({
-      rotateX: 45,
-      y: -200,
-      scale: 0.8,
-      transition: { duration: 1.2, ease: "easeInOut" }
+      scaleY: 0.1,
+      y: -300,
+      rotateX: -45,
+      transformOrigin: "center top",
+      transition: { 
+        duration: 1.0, 
+        ease: "easeInOut",
+        type: "spring",
+        stiffness: 100
+      }
     });
     
     setTimeout(() => {
       onTearComplete();
-    }, 1200);
+      setIsAnimating(false);
+    }, 1000);
+  };
+
+  const startCurtainUnfoldAnimation = async () => {
+    setIsAnimating(true);
+    
+    // Unfold downward like curtains falling
+    await controls.start({
+      scaleY: 1,
+      y: 0,
+      rotateX: 0,
+      transformOrigin: "center top",
+      transition: { 
+        duration: 1.2, 
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 80
+      }
+    });
+    
+    setIsAnimating(false);
   };
 
   const parallaxOffset = {
@@ -76,7 +119,7 @@ const BookHero = ({ mousePosition, onTearComplete }: BookHeroProps) => {
           </div>
 
           <BookZipElement />
-          <BookTearEffect isTearing={isTearing} />
+          <BookTearEffect isTearing={isAnimating} />
         </div>
       </motion.div>
     </div>
