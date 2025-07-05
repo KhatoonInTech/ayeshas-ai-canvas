@@ -44,93 +44,118 @@ const Index = () => {
           <Hero mousePosition={mousePosition} onTearComplete={handleTearComplete} />
         </section>
         
-        {showOtherSections && (
-          <>
-            <section id="about" className="min-h-screen flex items-center justify-center p-4">
-              <motion.div 
-                className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <About />
-              </motion.div>
-            </section>
-            
-            <section id="experience" className="min-h-screen flex items-center justify-center p-4">
-              <motion.div 
-                className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <Experience />
-              </motion.div>
-            </section>
-            
-            <section id="projects" className="min-h-screen flex items-center justify-center p-4">
-              <motion.div 
-                className="w-full max-w-7xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <Projects />
-              </motion.div>
-            </section>
-            
-            <section id="skills" className="min-h-screen flex items-center justify-center p-4">
-              <motion.div 
-                className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <Skills />
-              </motion.div>
-            </section>
+        {/* Always render sections but control visibility */}
+        <section 
+          id="about" 
+          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
+            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <motion.div 
+            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <About />
+          </motion.div>
+        </section>
+        
+        <section 
+          id="experience" 
+          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
+            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <motion.div 
+            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Experience />
+          </motion.div>
+        </section>
+        
+        <section 
+          id="projects" 
+          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
+            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <motion.div 
+            className="w-full max-w-7xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Projects />
+          </motion.div>
+        </section>
+        
+        <section 
+          id="skills" 
+          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
+            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <motion.div 
+            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Skills />
+          </motion.div>
+        </section>
 
-            <section id="reviews" className="min-h-screen flex items-center justify-center p-4">
-              <motion.div 
-                className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <Reviews />
-              </motion.div>
-            </section>
+        <section 
+          id="reviews" 
+          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
+            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <motion.div 
+            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Reviews />
+          </motion.div>
+        </section>
 
-            <section id="clients" className="min-h-screen flex items-center justify-center p-4">
-              <motion.div 
-                className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <HappyClients />
-              </motion.div>
-            </section>
-            
-            <section id="contact" className="min-h-screen flex items-center justify-center p-4">
-              <motion.div 
-                className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <Contact />
-              </motion.div>
-            </section>
-          </>
-        )}
+        <section 
+          id="clients" 
+          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
+            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <motion.div 
+            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <HappyClients />
+          </motion.div>
+        </section>
+        
+        <section 
+          id="contact" 
+          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
+            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <motion.div 
+            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Contact />
+          </motion.div>
+        </section>
       </div>
     </div>
   );

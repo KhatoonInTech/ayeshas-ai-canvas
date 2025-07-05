@@ -22,50 +22,78 @@ const Navigation = () => {
     const handleScroll = () => {
       const sections = navItems.map(item => {
         const element = document.getElementById(item.id);
+        if (!element) return null;
+        
+        const rect = element.getBoundingClientRect();
         return {
           id: item.id,
           element,
-          offsetTop: element ? element.offsetTop : 0,
-          offsetHeight: element ? element.offsetHeight : 0
+          top: rect.top,
+          bottom: rect.bottom,
+          height: rect.height,
+          offsetTop: element.offsetTop,
+          offsetHeight: element.offsetHeight
         };
-      }).filter(section => section.element);
+      }).filter(Boolean);
 
-      const scrollPosition = window.scrollY + 150; // Offset for better detection
+      if (sections.length === 0) return;
 
-      // Find the current section based on scroll position
-      let currentSection = 'hero';
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const threshold = windowHeight * 0.3; // 30% of viewport height
       
-      for (let i = 0; i < sections.length; i++) {
-        const section = sections[i];
-        const nextSection = sections[i + 1];
+      // Find the section that's most visible in the viewport
+      let currentSection = 'hero';
+      let maxVisibility = 0;
+      
+      for (const section of sections) {
+        // Calculate how much of the section is visible
+        const visibleTop = Math.max(0, -section.top);
+        const visibleBottom = Math.min(section.height, windowHeight - section.top);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        const visibilityRatio = visibleHeight / Math.min(section.height, windowHeight);
         
-        if (scrollPosition >= section.offsetTop) {
-          if (!nextSection || scrollPosition < nextSection.offsetTop) {
-            currentSection = section.id;
-            break;
-          }
+        // Also check if we're within the section bounds with scroll position
+        const inSectionBounds = scrollPosition >= section.offsetTop - threshold && 
+                               scrollPosition < section.offsetTop + section.offsetHeight - threshold;
+        
+        if ((visibilityRatio > maxVisibility && visibilityRatio > 0.3) || 
+            (inSectionBounds && visibilityRatio > 0.1)) {
+          maxVisibility = visibilityRatio;
+          currentSection = section.id;
         }
       }
 
+      console.log('Current section detected:', currentSection, 'Scroll position:', scrollPosition);
       setActiveSection(currentSection);
     };
 
     // Call once to set initial active section
-    handleScroll();
+    setTimeout(handleScroll, 100); // Small delay to ensure elements are rendered
     
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
+    console.log('Attempting to scroll to section:', sectionId);
     const element = document.getElementById(sectionId);
+    
     if (element) {
       const offsetTop = element.offsetTop - 80; // Account for fixed navbar height
+      console.log('Scrolling to offset:', offsetTop);
+      
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth'
       });
+      
+      // Update active section immediately for better UX
+      setActiveSection(sectionId);
+    } else {
+      console.error('Element not found:', sectionId);
     }
+    
     setIsMenuOpen(false); // Close mobile menu after clicking
   };
 
