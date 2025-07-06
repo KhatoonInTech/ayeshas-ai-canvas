@@ -76,24 +76,7 @@ const Index = () => {
           </motion.div>
         </section>
 
-        {/* Reviews Section - Moved above Projects */}
-        <section 
-          id="reviews" 
-          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
-            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-        >
-          <motion.div 
-            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
-            initial={{ opacity: 0, y: 50 }}
-            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Reviews />
-          </motion.div>
-        </section>
-
-        {/* Happy Clients Section - Moved above Projects */}
+        {/* Happy Clients Section */}
         <section 
           id="clients" 
           className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
@@ -110,7 +93,7 @@ const Index = () => {
           </motion.div>
         </section>
         
-        {/* Projects Section - Now below Reviews and Happy Clients */}
+        {/* Projects Section */}
         <section 
           id="projects" 
           className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
@@ -141,6 +124,23 @@ const Index = () => {
             transition={{ duration: 0.8 }}
           >
             <Skills />
+          </motion.div>
+        </section>
+
+        {/* Reviews Section - Moved below Skills */}
+        <section 
+          id="reviews" 
+          className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
+            showOtherSections ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <motion.div 
+            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            initial={{ opacity: 0, y: 50 }}
+            animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Reviews />
           </motion.div>
         </section>
         

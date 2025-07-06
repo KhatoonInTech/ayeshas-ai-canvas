@@ -8,19 +8,16 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'skills', label: 'Skills' },
-    { id: 'reviews', label: 'Reviews' },
-    { id: 'clients', label: 'Clients' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'reviews', label: 'Reviews' }
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.map(item => {
+      const sections = [...navItems, { id: 'hero', label: 'Home' }].map(item => {
         const element = document.getElementById(item.id);
         if (!element) return null;
         
@@ -40,20 +37,17 @@ const Navigation = () => {
 
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
-      const threshold = windowHeight * 0.3; // 30% of viewport height
+      const threshold = windowHeight * 0.3;
       
-      // Find the section that's most visible in the viewport
       let currentSection = 'hero';
       let maxVisibility = 0;
       
       for (const section of sections) {
-        // Calculate how much of the section is visible
         const visibleTop = Math.max(0, -section.top);
         const visibleBottom = Math.min(section.height, windowHeight - section.top);
         const visibleHeight = Math.max(0, visibleBottom - visibleTop);
         const visibilityRatio = visibleHeight / Math.min(section.height, windowHeight);
         
-        // Also check if we're within the section bounds with scroll position
         const inSectionBounds = scrollPosition >= section.offsetTop - threshold && 
                                scrollPosition < section.offsetTop + section.offsetHeight - threshold;
         
@@ -68,9 +62,7 @@ const Navigation = () => {
       setActiveSection(currentSection);
     };
 
-    // Call once to set initial active section
-    setTimeout(handleScroll, 100); // Small delay to ensure elements are rendered
-    
+    setTimeout(handleScroll, 100);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -80,7 +72,7 @@ const Navigation = () => {
     const element = document.getElementById(sectionId);
     
     if (element) {
-      const offsetTop = element.offsetTop - 80; // Account for fixed navbar height
+      const offsetTop = element.offsetTop - 80;
       console.log('Scrolling to offset:', offsetTop);
       
       window.scrollTo({
@@ -88,13 +80,12 @@ const Navigation = () => {
         behavior: 'smooth'
       });
       
-      // Update active section immediately for better UX
       setActiveSection(sectionId);
     } else {
       console.error('Element not found:', sectionId);
     }
     
-    setIsMenuOpen(false); // Close mobile menu after clicking
+    setIsMenuOpen(false);
   };
 
   return (
@@ -107,6 +98,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           <motion.div 
             className="text-2xl font-bold text-white cursor-pointer"
+            style={{ fontFamily: "'Dancing Script', cursive" }}
             whileHover={{ scale: 1.05 }}
             onClick={() => scrollToSection('hero')}
           >
