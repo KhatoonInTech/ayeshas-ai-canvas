@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -97,12 +96,22 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <motion.div 
-            className="text-2xl font-bold text-white cursor-pointer"
-            style={{ fontFamily: "'Dancing Script', cursive" }}
-            whileHover={{ scale: 1.05 }}
+            className="text-4xl md:text-5xl font-bold text-white cursor-pointer relative"
+            style={{ 
+              fontFamily: "'Dancing Script', cursive",
+              textShadow: '0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3)',
+              filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))'
+            }}
+            whileHover={{ 
+              scale: 1.05,
+              textShadow: '0 0 30px rgba(139, 92, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.5)'
+            }}
             onClick={() => scrollToSection('hero')}
           >
-            Ayesha Noreen
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-300 bg-clip-text text-transparent">
+              Ayesha Noreen
+            </span>
+            <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-60"></div>
           </motion.div>
           
           {/* Desktop Navigation */}
