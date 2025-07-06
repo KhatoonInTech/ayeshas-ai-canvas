@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import BookProfile from './BookProfile';
 import BookContent from './BookContent';
 import BookZipElement from './BookZipElement';
 import BookTearEffect from './BookTearEffect';
+import { useTheme } from './ThemeProvider';
 
 interface BookHeroProps {
   mousePosition: {
@@ -20,6 +20,7 @@ const BookHero = ({ mousePosition, onTearComplete }: BookHeroProps) => {
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
   const [isAnimating, setIsAnimating] = useState(false);
   const controls = useAnimation();
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,15 +112,27 @@ const BookHero = ({ mousePosition, onTearComplete }: BookHeroProps) => {
       >
         {/* Book Container */}
         <div className="relative w-[900px] h-[600px] perspective-1000">
-          {/* Book Pages with enhanced shadow and glow */}
-          <div className="relative w-full h-full flex bg-gradient-to-br from-amber-50 to-orange-100 rounded-lg shadow-2xl overflow-hidden border-4 border-amber-200/50">
+          {/* Book Pages with theme-responsive styling */}
+          <div className={`relative w-full h-full flex rounded-lg shadow-2xl overflow-hidden border-4 transition-colors duration-500 ${
+            resolvedTheme === 'light'
+              ? 'bg-gradient-to-br from-amber-50 to-orange-100 border-amber-200/50'
+              : 'bg-gradient-to-br from-amber-900/20 to-orange-900/20 border-amber-600/30'
+          }`}>
             
             <BookProfile />
             <BookContent />
 
-            {/* Enhanced Book Binding/Spine */}
-            <div className="absolute left-1/2 top-0 w-6 h-full bg-gradient-to-b from-amber-800 to-amber-900 transform -translate-x-1/2 shadow-2xl border-l-2 border-r-2 border-amber-600">
-              <div className="w-full h-full bg-gradient-to-r from-amber-700 to-amber-600 opacity-60"></div>
+            {/* Enhanced Book Binding/Spine with theme-responsive colors */}
+            <div className={`absolute left-1/2 top-0 w-6 h-full transform -translate-x-1/2 shadow-2xl border-l-2 border-r-2 transition-colors duration-500 ${
+              resolvedTheme === 'light'
+                ? 'bg-gradient-to-b from-amber-800 to-amber-900 border-amber-600'
+                : 'bg-gradient-to-b from-amber-700 to-amber-800 border-amber-500'
+            }`}>
+              <div className={`w-full h-full opacity-60 transition-colors duration-500 ${
+                resolvedTheme === 'light'
+                  ? 'bg-gradient-to-r from-amber-700 to-amber-600'
+                  : 'bg-gradient-to-r from-amber-600 to-amber-500'
+              }`}></div>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-400/20 to-transparent"></div>
             </div>
           </div>

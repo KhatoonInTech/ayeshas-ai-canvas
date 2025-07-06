@@ -94,7 +94,11 @@ const Navigation = () => {
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        resolvedTheme === 'light' 
+          ? 'bg-white/80 backdrop-blur-md border-b border-gray-200/50' 
+          : 'bg-black/20 backdrop-blur-md border-b border-white/10'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -143,8 +147,8 @@ const Navigation = () => {
                   onClick={() => scrollToSection(item.id)}
                   className={`text-sm font-medium transition-colors duration-200 ${
                     activeSection === item.id 
-                      ? 'text-purple-400' 
-                      : 'text-white/80 hover:text-white'
+                      ? (resolvedTheme === 'light' ? 'text-purple-600' : 'text-purple-400')
+                      : (resolvedTheme === 'light' ? 'text-gray-600 hover:text-gray-800' : 'text-white/80 hover:text-white')
                   }`}
                 >
                   {item.label}
@@ -159,7 +163,9 @@ const Navigation = () => {
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white p-2"
+              className={`p-2 transition-colors duration-200 ${
+                resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+              }`}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -168,7 +174,11 @@ const Navigation = () => {
           {/* Desktop CTA Button */}
           <motion.a
             href="mailto:ayeshanoreen092@gmail.com"
-            className="hidden md:block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 transition-all duration-200"
+            className={`hidden md:block px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+              resolvedTheme === 'light'
+                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
+                : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
+            }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -182,7 +192,11 @@ const Navigation = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-16 left-0 right-0 bg-black/90 backdrop-blur-md border-b border-white/10 py-4"
+            className={`md:hidden absolute top-16 left-0 right-0 py-4 transition-colors duration-300 ${
+              resolvedTheme === 'light'
+                ? 'bg-white/95 backdrop-blur-md border-b border-gray-200/50'
+                : 'bg-black/90 backdrop-blur-md border-b border-white/10'
+            }`}
           >
             <div className="flex flex-col space-y-4 px-4">
               {navItems.map((item) => (
@@ -191,8 +205,8 @@ const Navigation = () => {
                   onClick={() => scrollToSection(item.id)}
                   className={`text-left py-2 text-sm font-medium transition-colors duration-200 ${
                     activeSection === item.id 
-                      ? 'text-purple-400' 
-                      : 'text-white/80 hover:text-white'
+                      ? (resolvedTheme === 'light' ? 'text-purple-600' : 'text-purple-400')
+                      : (resolvedTheme === 'light' ? 'text-gray-600 hover:text-gray-800' : 'text-white/80 hover:text-white')
                   }`}
                 >
                   {item.label}
