@@ -36,11 +36,14 @@ const IndexContent = () => {
   };
 
   return (
-    <div className={`relative min-h-screen transition-colors duration-500 overflow-hidden ${
-      resolvedTheme === 'light' 
-        ? 'bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50' 
-        : 'bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950'
-    }`} style={{ cursor: 'none' }}>
+    <div 
+      className={`relative min-h-screen transition-colors duration-500 overflow-hidden ${
+        resolvedTheme === 'light' 
+          ? 'bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50' 
+          : 'bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950'
+      }`} 
+      style={{ cursor: 'none' }}
+    >
       <MouseTrackingBackground mousePosition={mousePosition} />
       <Background3D />
       <Navigation />
@@ -129,7 +132,7 @@ const IndexContent = () => {
             transition={{ duration: 0.8 }}
           >
             <Projects />
-          </div>
+          </motion.div>
         </section>
         
         {/* Skills Section */}
