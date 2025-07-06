@@ -1,11 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from './ThemeProvider';
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   const navItems = [
     { id: 'about', label: 'About' },
@@ -97,33 +99,64 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <motion.div 
-            className="text-2xl font-bold text-white cursor-pointer"
-            style={{ fontFamily: "'Dancing Script', cursive" }}
+            className={`text-3xl font-bold cursor-pointer relative transition-colors duration-300 ${
+              resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+            }`}
+            style={{ 
+              fontFamily: "'Dancing Script', cursive",
+              textShadow: resolvedTheme === 'light' ? '0 2px 4px rgba(0,0,0,0.1)' : '0 2px 4px rgba(255,255,255,0.1)'
+            }}
             whileHover={{ scale: 1.05 }}
             onClick={() => scrollToSection('hero')}
           >
-            Ayesha Noreen
+            <span className="relative">
+              Ayesha Noreen
+              <motion.div 
+                className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r ${
+                  resolvedTheme === 'light' 
+                    ? 'from-purple-600 via-pink-600 to-purple-600' 
+                    : 'from-purple-400 via-pink-400 to-purple-400'
+                }`}
+                initial={{ width: 0 }}
+                animate={{ width: '100%' }}
+                transition={{ duration: 2, delay: 0.5 }}
+              />
+              <motion.div 
+                className={`absolute -bottom-2 left-1/2 w-16 h-0.5 bg-gradient-to-r ${
+                  resolvedTheme === 'light' 
+                    ? 'from-transparent via-purple-600 to-transparent' 
+                    : 'from-transparent via-purple-400 to-transparent'
+                } transform -translate-x-1/2`}
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 1.5, delay: 1 }}
+              />
+            </span>
           </motion.div>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  activeSection === item.id 
-                    ? 'text-purple-400' 
-                    : 'text-white/80 hover:text-white'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
+          <div className="hidden md:flex items-center space-x-6">
+            <div className="flex space-x-6">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`text-sm font-medium transition-colors duration-200 ${
+                    activeSection === item.id 
+                      ? 'text-purple-400' 
+                      : 'text-white/80 hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-white p-2"

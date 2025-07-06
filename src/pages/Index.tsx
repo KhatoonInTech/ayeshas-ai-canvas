@@ -12,10 +12,12 @@ import HappyClients from '../components/HappyClients';
 import Navigation from '../components/Navigation';
 import Background3D from '../components/Background3D';
 import MouseTrackingBackground from '../components/MouseTrackingBackground';
+import { ThemeProvider, useTheme } from '../components/ThemeProvider';
 
-const Index = () => {
+const IndexContent = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showOtherSections, setShowOtherSections] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -34,7 +36,11 @@ const Index = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950 overflow-hidden" style={{ cursor: 'none' }}>
+    <div className={`relative min-h-screen transition-colors duration-500 overflow-hidden ${
+      resolvedTheme === 'light' 
+        ? 'bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50' 
+        : 'bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950'
+    }`} style={{ cursor: 'none' }}>
       <MouseTrackingBackground mousePosition={mousePosition} />
       <Background3D />
       <Navigation />
@@ -54,7 +60,11 @@ const Index = () => {
           animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl">
+          <div className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
+            resolvedTheme === 'light' 
+              ? 'bg-white/70 border-gray-200/30' 
+              : 'bg-white/5 border-white/10'
+          }`}>
             <About />
           </div>
         </motion.section>
@@ -67,7 +77,11 @@ const Index = () => {
           }`}
         >
           <motion.div 
-            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
+              resolvedTheme === 'light' 
+                ? 'bg-white/70 border-gray-200/30' 
+                : 'bg-white/5 border-white/10'
+            }`}
             initial={{ opacity: 0, y: 50 }}
             animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.8 }}
@@ -84,7 +98,11 @@ const Index = () => {
           }`}
         >
           <motion.div 
-            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
+              resolvedTheme === 'light' 
+                ? 'bg-white/70 border-gray-200/30' 
+                : 'bg-white/5 border-white/10'
+            }`}
             initial={{ opacity: 0, y: 50 }}
             animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.8 }}
@@ -101,13 +119,17 @@ const Index = () => {
           }`}
         >
           <motion.div 
-            className="w-full max-w-7xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            className={`w-full max-w-7xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
+              resolvedTheme === 'light' 
+                ? 'bg-white/70 border-gray-200/30' 
+                : 'bg-white/5 border-white/10'
+            }`}
             initial={{ opacity: 0, y: 50 }}
             animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.8 }}
           >
             <Projects />
-          </motion.div>
+          </div>
         </section>
         
         {/* Skills Section */}
@@ -118,7 +140,11 @@ const Index = () => {
           }`}
         >
           <motion.div 
-            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
+              resolvedTheme === 'light' 
+                ? 'bg-white/70 border-gray-200/30' 
+                : 'bg-white/5 border-white/10'
+            }`}
             initial={{ opacity: 0, y: 50 }}
             animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.8 }}
@@ -127,7 +153,7 @@ const Index = () => {
           </motion.div>
         </section>
 
-        {/* Reviews Section - Moved below Skills */}
+        {/* Reviews Section */}
         <section 
           id="reviews" 
           className={`min-h-screen flex items-center justify-center p-4 transition-opacity duration-1000 ${
@@ -135,7 +161,11 @@ const Index = () => {
           }`}
         >
           <motion.div 
-            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
+              resolvedTheme === 'light' 
+                ? 'bg-white/70 border-gray-200/30' 
+                : 'bg-white/5 border-white/10'
+            }`}
             initial={{ opacity: 0, y: 50 }}
             animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.8 }}
@@ -152,7 +182,11 @@ const Index = () => {
           }`}
         >
           <motion.div 
-            className="w-full max-w-6xl bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl"
+            className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
+              resolvedTheme === 'light' 
+                ? 'bg-white/70 border-gray-200/30' 
+                : 'bg-white/5 border-white/10'
+            }`}
             initial={{ opacity: 0, y: 50 }}
             animate={showOtherSections ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.8 }}
@@ -162,6 +196,14 @@ const Index = () => {
         </section>
       </div>
     </div>
+  );
+};
+
+const Index = () => {
+  return (
+    <ThemeProvider>
+      <IndexContent />
+    </ThemeProvider>
   );
 };
 
