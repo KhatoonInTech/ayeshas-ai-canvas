@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from './ThemeProvider';
 
 const clients = [
   { id: 1, name: "TechCorp", initials: "TC" },
@@ -12,6 +13,8 @@ const clients = [
 ];
 
 const HappyClients = () => {
+  const { resolvedTheme } = useTheme();
+
   return (
     <div className="py-20">
       <motion.div
@@ -21,8 +24,14 @@ const HappyClients = () => {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="text-4xl font-bold text-white mb-4">Happy Clients</h2>
-        <p className="text-white/70 text-lg max-w-2xl mx-auto">
+        <h2 className={`text-4xl font-bold mb-4 transition-colors duration-500 ${
+          resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+        }`}>
+          Happy Clients
+        </h2>
+        <p className={`text-lg max-w-2xl mx-auto transition-colors duration-500 ${
+          resolvedTheme === 'light' ? 'text-gray-600' : 'text-white/70'
+        }`}>
           Trusted by innovative companies worldwide to deliver exceptional AI and full-stack solutions.
         </p>
       </motion.div>
@@ -87,19 +96,35 @@ const HappyClients = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           <div className="text-center">
             <div className="text-3xl font-bold text-purple-400 mb-2">50+</div>
-            <div className="text-white/70">Projects Completed</div>
+            <div className={`transition-colors duration-500 ${
+              resolvedTheme === 'light' ? 'text-gray-600' : 'text-white/70'
+            }`}>
+              Projects Completed
+            </div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-pink-400 mb-2">25+</div>
-            <div className="text-white/70">Happy Clients</div>
+            <div className={`transition-colors duration-500 ${
+              resolvedTheme === 'light' ? 'text-gray-600' : 'text-white/70'
+            }`}>
+              Happy Clients
+            </div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-blue-400 mb-2">3+</div>
-            <div className="text-white/70">Years Experience</div>
+            <div className={`transition-colors duration-500 ${
+              resolvedTheme === 'light' ? 'text-gray-600' : 'text-white/70'
+            }`}>
+              Years Experience
+            </div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-orange-400 mb-2">100%</div>
-            <div className="text-white/70">Client Satisfaction</div>
+            <div className={`transition-colors duration-500 ${
+              resolvedTheme === 'light' ? 'text-gray-600' : 'text-white/70'
+            }`}>
+              Client Satisfaction
+            </div>
           </div>
         </div>
       </motion.div>

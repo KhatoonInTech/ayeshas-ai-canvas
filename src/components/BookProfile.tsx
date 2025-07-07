@@ -2,12 +2,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
 
 const BookProfile = () => {
+  const { resolvedTheme } = useTheme();
+  
   const paperTexture = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-opacity='0.03'%3E%3Cpolygon fill='%23000' points='50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40'/%3E%3C/g%3E%3C/svg%3E";
 
   return (
-    <div className="w-1/2 h-full relative bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center border-r-2 border-amber-200">
+    <div className={`w-1/2 h-full relative flex items-center justify-center border-r-2 transition-colors duration-500 ${
+      resolvedTheme === 'light'
+        ? 'bg-gradient-to-br from-amber-50 to-orange-100 border-amber-200'
+        : 'bg-gradient-to-br from-amber-900/20 to-orange-900/20 border-amber-600/30'
+    }`}>
       {/* Paper texture overlay */}
       <div 
         className="absolute inset-0 opacity-20"

@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
 
 const reviews = [
   {
@@ -34,6 +35,8 @@ const reviews = [
 ];
 
 const Reviews = () => {
+  const { resolvedTheme } = useTheme();
+
   return (
     <div className="py-20">
       <motion.div
@@ -43,8 +46,14 @@ const Reviews = () => {
         viewport={{ once: true }}
         className="text-center mb-12"
       >
-        <h2 className="text-4xl font-bold text-white mb-4">What Clients Say</h2>
-        <p className="text-white/70 text-lg max-w-2xl mx-auto">
+        <h2 className={`text-4xl font-bold mb-4 transition-colors duration-500 ${
+          resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+        }`}>
+          What Clients Say
+        </h2>
+        <p className={`text-lg max-w-2xl mx-auto transition-colors duration-500 ${
+          resolvedTheme === 'light' ? 'text-gray-600' : 'text-white/70'
+        }`}>
           Don't just take my word for it - here's what my clients have to say about working with me.
         </p>
       </motion.div>
@@ -57,15 +66,27 @@ const Reviews = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.2 }}
             viewport={{ once: true }}
-            className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-all duration-300"
+            className={`backdrop-blur-lg border rounded-xl p-6 transition-all duration-300 ${
+              resolvedTheme === 'light'
+                ? 'bg-white/80 border-gray-200/50 hover:bg-white/90'
+                : 'bg-white/10 border-white/20 hover:bg-white/15'
+            }`}
           >
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
                 {review.avatar}
               </div>
               <div>
-                <h4 className="text-white font-semibold">{review.name}</h4>
-                <p className="text-white/60 text-sm">{review.role} at {review.company}</p>
+                <h4 className={`font-semibold transition-colors duration-500 ${
+                  resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+                }`}>
+                  {review.name}
+                </h4>
+                <p className={`text-sm transition-colors duration-500 ${
+                  resolvedTheme === 'light' ? 'text-gray-600' : 'text-white/60'
+                }`}>
+                  {review.role} at {review.company}
+                </p>
               </div>
             </div>
 
@@ -77,7 +98,9 @@ const Reviews = () => {
 
             <div className="relative">
               <Quote className="w-8 h-8 text-purple-400 opacity-50 absolute -top-2 -left-2" />
-              <p className="text-white/80 leading-relaxed pl-6">
+              <p className={`leading-relaxed pl-6 transition-colors duration-500 ${
+                resolvedTheme === 'light' ? 'text-gray-700' : 'text-white/80'
+              }`}>
                 {review.review}
               </p>
             </div>
