@@ -2,8 +2,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Brain, Database, Zap, Globe, Settings, Wrench, Cpu, Layers, Cloud, Monitor, Users } from 'lucide-react';
+import { useTheme } from './ThemeProvider';
 
 const Skills = () => {
+  const { resolvedTheme } = useTheme();
+  
   const skillCategories = [
     {
       title: 'Programming Languages',
@@ -51,9 +54,13 @@ const Skills = () => {
         transition={{ duration: 0.8 }}
         className="text-center mb-12"
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Skills & Expertise</h2>
+        <h2 className={`text-4xl md:text-5xl font-bold mb-6 transition-colors duration-500 ${
+          resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+        }`}>Skills & Expertise</h2>
         <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto mb-8"></div>
-        <p className="text-white/80 max-w-3xl mx-auto">
+        <p className={`max-w-3xl mx-auto transition-colors duration-500 ${
+          resolvedTheme === 'light' ? 'text-gray-700' : 'text-white/80'
+        }`}>
           A comprehensive skill set spanning AI, machine learning, full-stack development, 
           and modern technologies that power innovative solutions.
         </p>
@@ -68,12 +75,18 @@ const Skills = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="group"
           >
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 h-full hover:bg-white/10 transition-all duration-200 hover:scale-105">
+            <div className={`backdrop-blur-sm border rounded-xl p-6 h-full transition-all duration-200 hover:scale-105 ${
+              resolvedTheme === 'light'
+                ? 'bg-white/70 border-gray-200/50 hover:bg-white/80'
+                : 'bg-white/5 border-white/10 hover:bg-white/10'
+            }`}>
               <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${category.color} flex items-center justify-center mb-4`}>
                 <category.icon className="w-6 h-6 text-white" />
               </div>
               
-              <h3 className="text-xl font-bold text-white mb-4">{category.title}</h3>
+              <h3 className={`text-xl font-bold mb-4 transition-colors duration-500 ${
+                resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+              }`}>{category.title}</h3>
               
               <div className="space-y-2">
                 {category.skills.map((skill, skillIndex) => (
@@ -85,7 +98,9 @@ const Skills = () => {
                     className="flex items-center space-x-3"
                   >
                     <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${category.color}`}></div>
-                    <span className="text-white/80 text-sm">{skill}</span>
+                    <span className={`text-sm transition-colors duration-500 ${
+                      resolvedTheme === 'light' ? 'text-gray-700' : 'text-white/80'
+                    }`}>{skill}</span>
                   </motion.div>
                 ))}
               </div>
@@ -99,24 +114,42 @@ const Skills = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
-        <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 rounded-xl p-8">
-          <h3 className="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center gap-2">
+        <div className={`border rounded-xl p-8 transition-colors duration-500 ${
+          resolvedTheme === 'light'
+            ? 'bg-purple-100/50 border-purple-200/50'
+            : 'bg-gradient-to-r from-purple-600/20 to-pink-600/20 border-purple-500/30'
+        }`}>
+          <h3 className={`text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2 transition-colors duration-500 ${
+            resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+          }`}>
             <Database className="w-6 h-6" />
             Recent Achievements
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="text-center flex items-center gap-3">
-              <Cloud className="w-8 h-8 text-purple-300" />
+              <Cloud className={`w-8 h-8 transition-colors duration-500 ${
+                resolvedTheme === 'light' ? 'text-purple-600' : 'text-purple-300'
+              }`} />
               <div>
-                <h4 className="text-lg font-semibold text-purple-300 mb-2">AWS AI/ML Scholarship</h4>
-                <p className="text-white/80 text-sm">AI Programming with Python & AWS Fundamentals</p>
+                <h4 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${
+                  resolvedTheme === 'light' ? 'text-purple-700' : 'text-purple-300'
+                }`}>AWS AI/ML Scholarship</h4>
+                <p className={`text-sm transition-colors duration-500 ${
+                  resolvedTheme === 'light' ? 'text-gray-700' : 'text-white/80'
+                }`}>AI Programming with Python & AWS Fundamentals</p>
               </div>
             </div>
             <div className="text-center flex items-center gap-3">
-              <Monitor className="w-8 h-8 text-purple-300" />
+              <Monitor className={`w-8 h-8 transition-colors duration-500 ${
+                resolvedTheme === 'light' ? 'text-purple-600' : 'text-purple-300'
+              }`} />
               <div>
-                <h4 className="text-lg font-semibold text-purple-300 mb-2">Google Gemini API Expert</h4>
-                <p className="text-white/80 text-sm">Certified by Udacity</p>
+                <h4 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${
+                  resolvedTheme === 'light' ? 'text-purple-700' : 'text-purple-300'
+                }`}>Google Gemini API Expert</h4>
+                <p className={`text-sm transition-colors duration-500 ${
+                  resolvedTheme === 'light' ? 'text-gray-700' : 'text-white/80'
+                }`}>Certified by Udacity</p>
               </div>
             </div>
           </div>
