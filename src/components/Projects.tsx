@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Zap, Brain, Search, MessageSquare, FileText, Smartphone, Globe, BarChart3 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { useTheme } from './ThemeProvider';
 
 const Projects = () => {
+  const { resolvedTheme } = useTheme();
+  
   const projectsByCategory = {
     'agentic-ai': [
       {
@@ -87,37 +90,61 @@ const Projects = () => {
         transition={{ duration: 0.8 }}
         className="text-center mb-12"
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Featured Projects</h2>
+        <h2 className={`text-4xl md:text-5xl font-bold mb-6 transition-colors duration-500 ${
+          resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+        }`}>Featured Projects</h2>
         <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto mb-8"></div>
-        <p className="text-white/80 max-w-3xl mx-auto">
+        <p className={`max-w-3xl mx-auto transition-colors duration-500 ${
+          resolvedTheme === 'light' ? 'text-gray-700' : 'text-white/80'
+        }`}>
           A showcase of innovative AI-powered solutions that automate processes, 
           enhance efficiency, and solve real-world problems across various domains.
         </p>
       </motion.div>
 
       <Tabs defaultValue="agentic-ai" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 bg-white/10 border border-white/20 rounded-xl p-1 mb-8">
+        <TabsList className={`grid w-full grid-cols-2 lg:grid-cols-4 border rounded-xl p-1 mb-8 transition-colors duration-500 ${
+          resolvedTheme === 'light'
+            ? 'bg-white/80 border-gray-200/50'
+            : 'bg-white/10 border-white/20'
+        }`}>
           <TabsTrigger 
             value="agentic-ai" 
-            className="text-white data-[state=active]:bg-purple-600 data-[state=active]:text-white rounded-lg transition-all"
+            className={`transition-all rounded-lg ${
+              resolvedTheme === 'light'
+                ? 'text-gray-700 data-[state=active]:bg-purple-600 data-[state=active]:text-white'
+                : 'text-white data-[state=active]:bg-purple-600 data-[state=active]:text-white'
+            }`}
           >
             Agentic AI & Automation
           </TabsTrigger>
           <TabsTrigger 
             value="machine-learning" 
-            className="text-white data-[state=active]:bg-purple-600 data-[state=active]:text-white rounded-lg transition-all"
+            className={`transition-all rounded-lg ${
+              resolvedTheme === 'light'
+                ? 'text-gray-700 data-[state=active]:bg-purple-600 data-[state=active]:text-white'
+                : 'text-white data-[state=active]:bg-purple-600 data-[state=active]:text-white'
+            }`}
           >
             Machine Learning
           </TabsTrigger>
           <TabsTrigger 
             value="deep-learning" 
-            className="text-white data-[state=active]:bg-purple-600 data-[state=active]:text-white rounded-lg transition-all"
+            className={`transition-all rounded-lg ${
+              resolvedTheme === 'light'
+                ? 'text-gray-700 data-[state=active]:bg-purple-600 data-[state=active]:text-white'
+                : 'text-white data-[state=active]:bg-purple-600 data-[state=active]:text-white'
+            }`}
           >
             Deep Learning
           </TabsTrigger>
           <TabsTrigger 
             value="fullstack" 
-            className="text-white data-[state=active]:bg-purple-600 data-[state=active]:text-white rounded-lg transition-all"
+            className={`transition-all rounded-lg ${
+              resolvedTheme === 'light'
+                ? 'text-gray-700 data-[state=active]:bg-purple-600 data-[state=active]:text-white'
+                : 'text-white data-[state=active]:bg-purple-600 data-[state=active]:text-white'
+            }`}
           >
             Full Stack Development
           </TabsTrigger>
@@ -134,21 +161,35 @@ const Projects = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group"
                 >
-                  <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 h-full hover:bg-white/10 transition-all duration-200 hover:scale-105">
+                  <div className={`backdrop-blur-sm border rounded-xl p-6 h-full transition-all duration-200 hover:scale-105 ${
+                    resolvedTheme === 'light'
+                      ? 'bg-white/70 border-gray-200/50 hover:bg-white/80'
+                      : 'bg-white/5 border-white/10 hover:bg-white/10'
+                  }`}>
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${project.color} flex items-center justify-center mb-4`}>
                       <project.icon className="w-6 h-6 text-white" />
                     </div>
                     
-                    <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
-                    <p className="text-white/70 mb-4 leading-relaxed">{project.description}</p>
+                    <h3 className={`text-xl font-bold mb-3 transition-colors duration-500 ${
+                      resolvedTheme === 'light' ? 'text-gray-800' : 'text-white'
+                    }`}>{project.title}</h3>
+                    <p className={`mb-4 leading-relaxed transition-colors duration-500 ${
+                      resolvedTheme === 'light' ? 'text-gray-700' : 'text-white/70'
+                    }`}>{project.description}</p>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-purple-300 mb-2">Technologies:</h4>
+                      <h4 className={`text-sm font-semibold mb-2 transition-colors duration-500 ${
+                        resolvedTheme === 'light' ? 'text-purple-700' : 'text-purple-300'
+                      }`}>Technologies:</h4>
                       <div className="flex flex-wrap gap-2">
                         {project.features.map((feature, fIndex) => (
                           <span
                             key={fIndex}
-                            className="bg-white/10 text-white/80 px-2 py-1 rounded-md text-xs"
+                            className={`px-2 py-1 rounded-md text-xs transition-colors duration-500 ${
+                              resolvedTheme === 'light'
+                                ? 'bg-purple-100/80 text-purple-700'
+                                : 'bg-white/10 text-white/80'
+                            }`}
                           >
                             {feature}
                           </span>
@@ -157,8 +198,12 @@ const Projects = () => {
                     </div>
                     
                     <div className="mb-6">
-                      <h4 className="text-sm font-semibold text-green-300 mb-2">Impact:</h4>
-                      <p className="text-white/70 text-sm">{project.impact}</p>
+                      <h4 className={`text-sm font-semibold mb-2 transition-colors duration-500 ${
+                        resolvedTheme === 'light' ? 'text-green-700' : 'text-green-300'
+                      }`}>Impact:</h4>
+                      <p className={`text-sm transition-colors duration-500 ${
+                        resolvedTheme === 'light' ? 'text-gray-700' : 'text-white/70'
+                      }`}>{project.impact}</p>
                     </div>
                     
                     <div className="flex space-x-3">
@@ -188,7 +233,11 @@ const Projects = () => {
           href="https://github.com/KhatoonInTech"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105"
+          className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 ${
+            resolvedTheme === 'light'
+              ? 'bg-white/70 hover:bg-white/80 text-gray-800 border border-gray-200/50'
+              : 'bg-white/10 hover:bg-white/20 text-white'
+          }`}
         >
           <Github className="w-5 h-5" />
           <span>View All Projects on GitHub</span>

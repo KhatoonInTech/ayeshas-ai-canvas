@@ -17,7 +17,7 @@ const Hero = ({ mousePosition, onTearComplete = () => {} }: HeroProps) => {
   return (
     <div className={`min-h-screen transition-colors duration-500 ${
       resolvedTheme === 'light' 
-        ? 'bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50' 
+        ? 'bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100' 
         : 'bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950'
     }`}>
       <BookHero 

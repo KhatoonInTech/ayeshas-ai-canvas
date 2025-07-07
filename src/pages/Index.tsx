@@ -39,7 +39,7 @@ const IndexContent = () => {
     <div 
       className={`relative min-h-screen transition-colors duration-500 overflow-hidden ${
         resolvedTheme === 'light' 
-          ? 'bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50' 
+          ? 'bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100' 
           : 'bg-gradient-to-br from-slate-950 via-gray-900 to-slate-950'
       }`} 
       style={{ cursor: 'none' }}
@@ -65,7 +65,7 @@ const IndexContent = () => {
         >
           <div className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
             resolvedTheme === 'light' 
-              ? 'bg-white/70 border-gray-200/30' 
+              ? 'bg-white/80 border-purple-200/30 shadow-purple-200/20' 
               : 'bg-white/5 border-white/10'
           }`}>
             <About />
@@ -82,7 +82,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/70 border-gray-200/30' 
+                ? 'bg-white/80 border-blue-200/30 shadow-blue-200/20' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -103,7 +103,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/70 border-gray-200/30' 
+                ? 'bg-white/80 border-pink-200/30 shadow-pink-200/20' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -124,7 +124,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-7xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/70 border-gray-200/30' 
+                ? 'bg-white/80 border-green-200/30 shadow-green-200/20' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -145,7 +145,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/70 border-gray-200/30' 
+                ? 'bg-white/80 border-indigo-200/30 shadow-indigo-200/20' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -166,7 +166,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/70 border-gray-200/30' 
+                ? 'bg-white/80 border-yellow-200/30 shadow-yellow-200/20' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -187,7 +187,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/70 border-gray-200/30' 
+                ? 'bg-white/80 border-teal-200/30 shadow-teal-200/20' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
