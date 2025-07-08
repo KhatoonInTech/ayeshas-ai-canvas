@@ -65,7 +65,7 @@ const IndexContent = () => {
         >
           <div className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
             resolvedTheme === 'light' 
-              ? 'bg-white/30 border-purple-200/40 shadow-purple-200/30' 
+              ? 'bg-white/15 border-purple-200/40 shadow-purple-200/30' 
               : 'bg-white/5 border-white/10'
           }`}>
             <About />
@@ -82,7 +82,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/30 border-blue-200/40 shadow-blue-200/30' 
+                ? 'bg-white/15 border-blue-200/40 shadow-blue-200/30' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -103,7 +103,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/30 border-pink-200/40 shadow-pink-200/30' 
+                ? 'bg-white/15 border-pink-200/40 shadow-pink-200/30' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -124,7 +124,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-7xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/30 border-green-200/40 shadow-green-200/30' 
+                ? 'bg-white/15 border-green-200/40 shadow-green-200/30' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -145,7 +145,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/30 border-indigo-200/40 shadow-indigo-200/30' 
+                ? 'bg-white/15 border-indigo-200/40 shadow-indigo-200/30' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -166,7 +166,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/30 border-yellow-200/40 shadow-yellow-200/30' 
+                ? 'bg-white/15 border-yellow-200/40 shadow-yellow-200/30' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
@@ -187,7 +187,7 @@ const IndexContent = () => {
           <motion.div 
             className={`w-full max-w-6xl backdrop-blur-lg border rounded-3xl p-8 shadow-2xl transition-colors duration-500 ${
               resolvedTheme === 'light' 
-                ? 'bg-white/30 border-teal-200/40 shadow-teal-200/30' 
+                ? 'bg-white/15 border-teal-200/40 shadow-teal-200/30' 
                 : 'bg-white/5 border-white/10'
             }`}
             initial={{ opacity: 0, y: 50 }}
